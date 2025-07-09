@@ -6,7 +6,17 @@ const validateAndGetUserId = () => {
   return isNaN(userId) ? validateAndGetUserId() : userId;
 };
 
-const getUserProfile = () => {
+const exractProfile = (users, userId) => {
+  return new Promise((resolve, reject) => {
+    if (isUserPresent(users, userId)) {
+      resolve(users[userId]);
+    }
+
+    reject("User not found. Please check the User ID and try again.");
+  });
+};
+
+const getUserProfile = async () => {
   const users = {
     0: {
       name: "John Doe",
@@ -26,10 +36,9 @@ const getUserProfile = () => {
   };
 
   const userId = validateAndGetUserId();
+  const user = await exractProfile(users, userId);
 
-  if (isUserPresent(users, userId)) return users[userId];
-
-  throw "User not found. Please check the User ID and try again.";
+  return user;
 };
 
-console.log(getUserProfile());
+getUserProfile();
