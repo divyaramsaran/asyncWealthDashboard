@@ -1,7 +1,9 @@
+const isUserPresent = (users, id) => String(users[id]) !== "undefined";
+
 const validateAndGetUserId = () => {
   const userId = Number(prompt("Enter User Id"));
 
-  return userId >= 0 && userId <= 3 ? userId : validateAndGetUserId();
+  return isNaN(userId) ? validateAndGetUserId() : userId;
 };
 
 const getUserProfile = () => {
@@ -22,7 +24,12 @@ const getUserProfile = () => {
       email: "alice.johnson@example.com",
     },
   };
-  return users[validateAndGetUserId()];
+
+  const userId = validateAndGetUserId();
+
+  if (isUserPresent(users, userId)) return users[userId];
+
+  throw "User not found. Please check the User ID and try again.";
 };
 
 console.log(getUserProfile());
