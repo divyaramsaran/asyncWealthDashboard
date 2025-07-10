@@ -41,4 +41,22 @@ const getUserProfile = async () => {
   return user;
 };
 
-getUserProfile();
+const portfolio = {
+  0: [
+    { symbol: "AAPL", quantity: 10, price: 150 },
+    { symbol: "GOOGL", quantity: 5, price: 2800 },
+  ],
+
+  1:[
+    { symbol: "FACBOOK", quantity: 8, price: 350 },
+    { symbol: "YAHOO", quantity: 5, price: 2800 },
+  ],
+  2:[
+    { symbol: "BING", quantity: 10, price: 150 },
+    { symbol: "DUCKBDUCK", quantity: 5, price: 2800 },
+  ],
+};
+
+const getUSerPortfolio = () => {
+  const user = getUserProfile();
+};
