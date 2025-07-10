@@ -52,24 +52,43 @@ const getUserProfile = async () => {
   return [user, userId];
 };
 
-const portfolio = {
-  0: [
-    { symbol: "AAPL", quantity: 10, price: 150 },
-    { symbol: "GOOGL", quantity: 5, price: 2800 },
-  ],
+const printUser = (user) => {
+  return `User:${user.name} (${user.email})`;
+};
 
-  1: [
-    { symbol: "FACBOOK", quantity: 8, price: 350 },
-    { symbol: "YAHOO", quantity: 5, price: 2800 },
-  ],
-  2: [
-    { symbol: "BING", quantity: 10, price: 150 },
-    { symbol: "DUCKBDUCK", quantity: 5, price: 2800 },
-  ],
+const extractStocks = (portfolio, userId) => {
+  return new Promise((resolve) => {
+    setTimeout(
+      (resolve) => {
+        resolve(portfolio[userId]);
+      },
+      1000,
+      resolve
+    );
+  });
 };
 
 const getUSerPortfolio = async () => {
+  const portfolio = {
+    0: [
+      { symbol: "AAPL", quantity: 10, price: 150 },
+      { symbol: "GOOGL", quantity: 5, price: 2800 },
+    ],
+
+    1: [
+      { symbol: "FACBOOK", quantity: 8, price: 350 },
+      { symbol: "YAHOO", quantity: 5, price: 2800 },
+    ],
+    2: [
+      { symbol: "BING", quantity: 10, price: 150 },
+      { symbol: "DUCKBDUCK", quantity: 5, price: 2800 },
+    ],
+  };
+
   const [user, id] = await getUserProfile();
+  console.log(printUser(user));
+  const stocks = await extractStocks(portfolio, id);
+  return stocks;
 };
 
 getUSerPortfolio();
