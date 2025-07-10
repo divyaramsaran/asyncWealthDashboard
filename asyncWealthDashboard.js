@@ -8,11 +8,22 @@ const validateAndGetUserId = () => {
 
 const exractProfile = (users, userId) => {
   return new Promise((resolve, reject) => {
-    if (isUserPresent(users, userId)) {
-      resolve(users[userId]);
-    }
+    setTimeout(() => {
+      console.log(`Fetching data for user ID:${userId}...`);
+    }, 1000);
 
-    reject("User not found. Please check the User ID and try again.");
+    setTimeout(
+      (resolve, reject) => {
+        if (isUserPresent(users, userId)) {
+          resolve(users[userId]);
+        }
+
+        reject("User not found. Please check the User ID and try again.");
+      },
+      2000,
+      resolve,
+      reject
+    );
   });
 };
 
@@ -38,7 +49,7 @@ const getUserProfile = async () => {
   const userId = validateAndGetUserId();
   const user = await exractProfile(users, userId);
 
-  return user;
+  return [user, userId];
 };
 
 const portfolio = {
@@ -47,16 +58,18 @@ const portfolio = {
     { symbol: "GOOGL", quantity: 5, price: 2800 },
   ],
 
-  1:[
+  1: [
     { symbol: "FACBOOK", quantity: 8, price: 350 },
     { symbol: "YAHOO", quantity: 5, price: 2800 },
   ],
-  2:[
+  2: [
     { symbol: "BING", quantity: 10, price: 150 },
     { symbol: "DUCKBDUCK", quantity: 5, price: 2800 },
   ],
 };
 
-const getUSerPortfolio = () => {
-  const user = getUserProfile();
+const getUSerPortfolio = async () => {
+  const [user, id] = await getUserProfile();
 };
+
+getUSerPortfolio();
