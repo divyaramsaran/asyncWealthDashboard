@@ -106,3 +106,19 @@ const getStocks = async () => {
   return stocks;
 };
 
+const main = async () => {
+  try {
+    const stocks = await getStocks();
+    console.log(
+      `Total Value: ${stocks.reduce(
+        (acc, stock) => acc + stock.quantity * stock.price,
+        0
+      )}`
+    );
+    console.log("Thank you for using our service!");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+main();
