@@ -70,7 +70,7 @@ const extractStocks = (portfolio, userId) => {
 
 const stockMessage = (stocks) => {
   return stocks.map((stock) => {
-    return `${stock.symbol}   ${stock.quantity}   ${stock.price}    ${
+    return `${stock.symbol}  ${stock.quantity}  ${stock.price}  ${
       stock.quantity * stock.price
     }`;
   });
@@ -99,9 +99,10 @@ const getUSerPortfolio = async () => {
   return stocks;
 };
 
-const getStocks = () => {
-  const stocks = getUSerPortfolio();
-  console.log(stockMessage(stocks));
+const getStocks = async () => {
+  const stocks = await getUSerPortfolio();
+  console.log(`Symbol	Quantity	Price	Value`);
+  stockMessage(stocks).forEach((stock) => console.log(stock));
+  return stocks;
 };
 
-getStocks();
